@@ -15,7 +15,11 @@ The Transform is the `man in the middle`. It's responsive for making changes on 
 ### Writable
 The Writable usually lies in the client and is responsive to finally do something with the data received.
 
-<divider></divider>
+## Chunk and callbacks
+- `Chunk` is the data coming from the stream. It is a buffer and if you want to get the data, just parse it using `JSON.parse(chunk);` or use `toString();`.
+- `Callback` is used to inform the server (the readable stream) that the client received the data and it can send the other. If we don't pass it, it won't get the next data.
+
+-------- 
 
 ## TypeScript
 Install TS dev dependencies:

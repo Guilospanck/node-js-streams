@@ -1,4 +1,3 @@
-//
 describe("Server", () => {
 
   beforeEach(() => {

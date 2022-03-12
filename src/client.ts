@@ -1,54 +1,68 @@
 import { Transform, Writable } from 'stream';
 import axios from 'axios';
 
-const url = 'http://localhost:3000';
-
-type StreamData = {
+export type StreamData = {
   id: string,
   name: string
 }
 
-export const consume = async () => {
-  const response = await axios({
-    url,
-    method: 'GET',
-    responseType: 'stream'
-  });
+export class Client {
+  _url: string;
 
-  return response.data;
-};
+  constructor(url?: string) {
+    this._url = url ?? 'http://localhost:3000';
+  }
 
-export const stream = await consume();
-stream
-  .pipe(
-    new Transform({
-      transform(chunk, _, callback) {
-        const item: StreamData = JSON.parse(chunk);
-        const number: number = Number(/\d+/.exec(item.name)![0]);
-        let name = item.name;
+  async get() {
+    const stream = await this._consume();
+    stream
+      .pipe(
+        new Transform({
+          transform(chunk, _, callback) {
+            const item: StreamData = JSON.parse(chunk);
+            const number: number = Number(/\d+/.exec(item.name)![0]);
+            let name = item.name;
 
-        if(number % 2 === 0) {
-          name += " is even";
-        } else {
-          name += " is odd";
-        }
+            if (number % 2 === 0) {
+              name += " is even";
+            } else {
+              name += " is odd";
+            }
 
-        item.name = name;        
+            item.name = name;
 
-        // callback is used to inform the server that
-        // the client received the data and that it can
-        // send another one.
-        // If you don't pass a callback, it will stop at
-        // the item received.
-        callback(null, JSON.stringify(item));
-      }
-    })
-  )
-  .pipe(
-    new Writable({
-      write(chunk, _, callback) {
-        console.log(chunk.toString());
-        callback();
-      }
-    })
-  );
+            // callback is used to inform the server that
+            // the client received the data and that it can
+            // send another one.
+            // If you don't pass a callback, it will stop at
+            // the item received.
+            callback(null, JSON.stringify(item));
+          }
+        })
+      )
+      .pipe(
+        new Writable({
+          write(chunk, _, callback) {
+            console.log(chunk.toString());
+            callback();
+          }
+        })
+      );
+  }
+
+  async _consume() {
+    try {
+      const response = await axios({
+        url: this._url,
+        method: 'GET',
+        responseType: 'stream'
+      });
+
+      return response.data;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+  }
+
+}

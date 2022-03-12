@@ -1,4 +1,6 @@
 # NodeJS Streams
+[![codecov](https://codecov.io/gh/Guilospanck/node-js-streams/branch/main/graph/badge.svg?token=ZBFI1KICHQ)](https://codecov.io/gh/Guilospanck/node-js-streams)
+
 Basic example using NodeJS Streams.
 
 ## Streams

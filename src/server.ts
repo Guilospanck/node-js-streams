@@ -2,7 +2,7 @@ import { createServer, IncomingMessage, ServerResponse } from 'http';
 import { Readable } from 'stream';
 import { randomUUID } from 'crypto';
 
-function* run() {
+export function* run() {
   for (let index = 0; index <= 99; index++) {
     const data = {
       id: randomUUID(),
@@ -30,6 +30,8 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
   readable.pipe(res);
 };
 
-createServer(handler)
+export const server = () =>  createServer(handler)
   .listen(3000)
   .on('listening', () => console.log("Server running at port 3000!"));
+
+server();

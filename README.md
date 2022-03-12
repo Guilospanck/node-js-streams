@@ -33,3 +33,16 @@ npx tsc --init
 Use the `tsconfig.json` that exists in this repository for a more complete version.
 
 Also, add a new file called `nodemon.json` in order to run Nodemon with TypeScript without getting an error.
+
+--------
+
+## Jest with TS
+Install the Jest dev dependencies:
+```bash
+yarn add -D jest ts-jest @types/jest
+```
+Then generate a new `jest.config.js` file:
+```bash
+npx ts-jest config:init
+```
+

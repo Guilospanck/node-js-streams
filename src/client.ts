@@ -8,7 +8,7 @@ type StreamData = {
   name: string
 }
 
-const consume = async () => {
+export const consume = async () => {
   const response = await axios({
     url,
     method: 'GET',
@@ -18,7 +18,7 @@ const consume = async () => {
   return response.data;
 };
 
-const stream = await consume();
+export const stream = await consume();
 stream
   .pipe(
     new Transform({

@@ -14,3 +14,15 @@ The Transform is the `man in the middle`. It's responsive for making changes on 
 
 ### Writable
 The Writable usually lies in the client and is responsive to finally do something with the data received.
+
+<divider></divider>
+
+## TypeScript
+Install TS dev dependencies:
+```bash
+yarn add -D typescript ts-node
+```
+Then generate a new `tsconfig.json` file:
+```bash
+npx tsc --init
+```

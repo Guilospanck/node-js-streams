@@ -1,4 +1,5 @@
 import { Transform, Writable } from 'stream';
+import { pipeline } from 'stream/promises';
 import axios from 'axios';
 
 export type StreamData = {
@@ -8,15 +9,18 @@ export type StreamData = {
 
 export class Client {
   _url: string;
+  _data: StreamData[] = [];
 
   constructor(url?: string) {
     this._url = url ?? 'http://localhost:3000';
   }
 
   async get() {
-    const stream = await this._consume();
-    stream
-      .pipe(
+    try {
+      const self = this;
+      const stream = await this._consume();
+      await pipeline(
+        stream,
         new Transform({
           transform(chunk, _, callback) {
             const item: StreamData = JSON.parse(chunk);
@@ -38,16 +42,20 @@ export class Client {
             // the item received.
             callback(null, JSON.stringify(item));
           }
-        })
-      )
-      .pipe(
+        }),
         new Writable({
           write(chunk, _, callback) {
             console.log(chunk.toString());
+            self._data.push(JSON.parse(chunk));
             callback();
           }
         })
-      );
+      )
+      return self._data;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
   }
 
   async _consume() {

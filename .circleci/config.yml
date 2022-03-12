@@ -28,7 +28,11 @@ jobs:
           pkg-manager: yarn
       - run:
           name: Run tests
-          command: yarn test:cov
+          command: |
+            yarn test:cov
+            mv ./coverage/lcov-report/index.html /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
 
 workflows:
   # Below is the definition of your workflow.

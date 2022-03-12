@@ -1,0 +1,16 @@
+{
+  "name": "node-js-streams",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "repository": "https://github.com/Guilospanck/node-js-streams.git",
+  "author": "Guilherme Rodrigues <guilherme.rp2010@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "client": "nodemon src/client.js",
+    "server": "nodemon src/server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

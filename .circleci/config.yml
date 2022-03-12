@@ -31,8 +31,11 @@ jobs:
           command: |
             yarn test:cov
             mv ./coverage/lcov-report/index.html /tmp/artifacts
+            mv ./coverage/clover.xml /tmp/test-reports
       - store_artifacts:
           path: /tmp/artifacts
+      - store_test_results:
+          path: /tmp/test-reports
 
 workflows:
   # Below is the definition of your workflow.

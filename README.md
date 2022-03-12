@@ -41,7 +41,7 @@ Install the Jest dev dependencies:
 ```bash
 yarn add -D jest ts-jest @types/jest
 ```
-Then generate a new `jest.config.js` file:
+Then generate a new `jest.config.js` (or `jest.config.cjs`) file:
 ```bash
 npx ts-jest config:init
 ```

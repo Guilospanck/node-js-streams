@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  streams:
+    container_name: streams
+    restart: unless-stopped
+    build: .

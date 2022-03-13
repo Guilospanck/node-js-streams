@@ -11,7 +11,8 @@
     "server": "nodemon ./src/server.ts",
     "start:dev": "nodemon ./src/main.ts",
     "test": "jest --passWithNoTests --noStackTrace --runInBand --detectOpenHandles",
-    "test:cov": "jest --coverage --detectOpenHandles"
+    "test:cov": "jest --coverage --detectOpenHandles",
+    "build": "tsc --build"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",

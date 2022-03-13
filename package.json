@@ -9,6 +9,7 @@
   "scripts": {
     "client": "nodemon ./src/client.ts",
     "server": "nodemon ./src/server.ts",
+    "start:dev": "nodemon ./src/main.ts",
     "test": "jest --passWithNoTests --noStackTrace --runInBand --detectOpenHandles",
     "test:cov": "jest --coverage --detectOpenHandles"
   },

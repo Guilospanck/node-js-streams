@@ -1,26 +1,27 @@
-import http, { createServer, IncomingMessage, ServerResponse, Server as HttpServer } from 'http';
+import { createServer, IncomingMessage, ServerResponse, Server as HttpServer } from 'http';
 import { Readable } from 'stream';
 import { randomUUID } from 'crypto';
 
 export class Server {
   _server: HttpServer
+  _self: any
 
   constructor() {
+    this._self = this;
     this._server = this.init();
   }
 
   init() {
-    return http.createServer(this.handler)
+    return createServer(this.handler)
       .listen(3000)
       .on('listening', () => console.log("Server running at port 3000!"));
   }
 
   // A http request is a readable stream and a http response is a writable stream
-  async handler(_: IncomingMessage, res: ServerResponse) {
-    const self = this;
+  async handler(_: IncomingMessage, res: ServerResponse) {    
     const readable = new Readable({
       read() {
-        for (const data of self.run()) {
+        for (const data of Server.run()) {
           this.push(JSON.stringify(data) + '\n');
         }
 
@@ -33,7 +34,7 @@ export class Server {
     readable.pipe(res);
   };
 
-  *run() {
+  static *run() {
     for (let index = 0; index <= 99; index++) {
       const data = {
         id: randomUUID(),
@@ -45,4 +46,3 @@ export class Server {
   }
 
 }
-

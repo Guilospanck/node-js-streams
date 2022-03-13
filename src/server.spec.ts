@@ -34,10 +34,9 @@ describe("Server", () => {
   describe("generator function 'run'", () => {
     test("it should generate data successfully", () => {
       // arrange
-      const sut = makeSut();
-
+      
       // act
-      const result = sut.server.run();
+      const result = Server.run();
       const item1: StreamData = result.next().value as StreamData;
       const item2: StreamData = result.next().value as StreamData;
       const item3: StreamData = result.next().value as StreamData;

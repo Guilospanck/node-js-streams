@@ -3,6 +3,44 @@
 
 Basic example using NodeJS Streams.
 
+## Installation
+Git clone this repository:
+```bash
+git clone https://github.com/Guilospanck/node-js-streams.git
+```
+### "Slow" test
+Change directory into the repository:
+```bash
+cd node-js-streams/
+```
+Then run:
+```bash
+yarn
+```
+To install dependencies and then run:
+```bash
+yarn start:dev
+```
+
+### Fast test
+Be sure to have [Docker] and [Docker Compose] installed.
+
+Change directory into the repository:
+```bash
+cd node-js-streams/
+```
+Then run:
+```bash
+sudo docker-compose -f docker-compose.yml up -d --build
+```
+In order to view the logs once it's built, run:
+```bash
+sudo docker ps # get the id of the container
+sudo docker logs [id]
+```
+
+----
+
 ## Streams
 Basically we have three main structures: `Readable`, `Transform` and `Writable`.
 
@@ -48,3 +86,5 @@ Then generate a new `jest.config.js` (or `jest.config.cjs`) file:
 npx ts-jest config:init
 ```
 
+[Docker]: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+[Docker Compose]: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04

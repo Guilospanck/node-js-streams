@@ -50,7 +50,7 @@ The Readable is the `source` of data. So, let's say we have a `client-server` ar
 The Readable will be kept in the server and it will read and send the stream of data.
 
 ### Transform
-The Transform is the `man in the middle`. It's responsive for making changes on the data. Everything you want to do with the stream of data, you can use the Transform to do that.
+The Transform is the `man in the middle`. It's responsible for making changes on the data. Everything you want to do with the stream of data, you can use the Transform to do that.
 
 ### Writable
 The Writable usually lies in the client and is responsive to finally do something with the data received.
